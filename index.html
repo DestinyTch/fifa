@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FIFA/PS Competition Registration</title>
   <link rel="icon" type="image/png" href="https://futminna.edu.ng/wp-content/uploads/2022/11/cropped-futlogo1-32x32.png">
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP Animation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
-<body class="bg-gradient-to-br from-green-500 via-purple-500 to-purple-700 min-h-screen flex items-center justify-center p-4 relative">
+<body class="bg-gradient-to-br from-green-500 via-purple-500 to-purple-700 min-h-screen flex flex-col items-center justify-center p-6 gap-6 relative">
+
+  <!-- Competition Info Card -->
   <div id="card" class="bg-white max-w-md w-full rounded-2xl shadow-2xl p-6 text-center transform scale-95 opacity-0">
     <h1 class="text-2xl font-bold text-purple-700 mb-4">FIFA/PS Competition</h1>
     <p class="text-lg text-gray-700 mb-2"><span class="font-semibold">Account Number:</span> 7042625344</p>
@@ -19,50 +23,24 @@
 
     <p class="text-sm text-red-600 font-medium mb-4">⚠️ Make sure you have paid before clicking the button</p>
 
-    <button id="payBtn" class="w-full py-3 text-lg font-semibold text-white rounded-xl bg-gradient-to-r from-green-500 to-purple-600 shadow-lg hover:opacity-90 transition">I Have Paid</button>
+    <button id="payBtn" class="w-full py-3 text-lg font-semibold text-white rounded-xl bg-gradient-to-r from-green-500 to-purple-600 shadow-lg hover:opacity-90 transition">
+      I Have Paid
+    </button>
   </div>
-<div class="bg-blue-600 text-white p-6 rounded-2xl shadow-md text-center max-w-xl mx-auto">
-  <h2 class="text-2xl font-bold mb-2">📢 Registration is Open!</h2>
-  <p class="mb-4">Registration ends on <span class="font-semibold">27th August</span>. Don’t miss out!</p>
 
-  <!-- Countdown -->
-  <div id="countdown" class="text-3xl font-bold tracking-wide"></div>
-</div>
-
-<script>
-  // Set the end date
-  const endDate = new Date("August 27, 2025 23:59:59").getTime();
-
-  const countdownEl = document.getElementById("countdown");
-
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = endDate - now;
-
-    if (distance < 0) {
-      countdownEl.innerHTML = "⏰ Registration Closed";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countdownEl.innerHTML = `${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
-  }
-
-  updateCountdown(); // Initial call
-  setInterval(updateCountdown, 1000);
-</script>
+  <!-- Registration Countdown -->
+  <div id="countdownBox" class="bg-blue-600 text-white p-6 rounded-2xl shadow-md text-center max-w-md w-full opacity-0 transform translate-y-6">
+    <h2 class="text-2xl font-bold mb-2">📢 Registration is Open!</h2>
+    <p class="mb-4">Registration ends on <span class="font-semibold">27th August</span>. Don’t miss out!</p>
+    <div id="countdown" class="text-3xl font-bold tracking-wide"></div>
+  </div>
 
   <!-- Confirmation Modal -->
   <div id="confirmModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white rounded-xl shadow-xl p-6 max-w-sm w-full text-center">
       <h2 class="text-xl font-bold text-gray-800 mb-4">Confirm Payment</h2>
-      <p class="text-gray-600 mb-6">Are you sure you have made the payment of <span class="font-semibold text-green-600">2000 Naira</span>?</p>
+      <p class="text-gray-600 mb-6">Are you sure you have made the payment of 
+        <span class="font-semibold text-green-600">2000 Naira</span>?</p>
       <div class="flex justify-around">
         <button id="cancelBtn" class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition">Cancel</button>
         <button id="confirmBtn" class="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition">Yes, Continue</button>
@@ -71,10 +49,35 @@
   </div>
 
   <script>
- 
+    // Animate main card
     gsap.to("#card", { duration: 1, opacity: 1, scale: 1, ease: "back.out(1.7)" });
+    gsap.to("#countdownBox", { delay: 0.8, duration: 1, opacity: 1, y: 0, ease: "power3.out" });
 
+    // Countdown Logic
+    const endDate = new Date("August 27, 2025 23:59:59").getTime();
+    const countdownEl = document.getElementById("countdown");
 
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = "⏰ Registration Closed";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Modal Logic
     const payBtn = document.getElementById("payBtn");
     const confirmModal = document.getElementById("confirmModal");
     const cancelBtn = document.getElementById("cancelBtn");
