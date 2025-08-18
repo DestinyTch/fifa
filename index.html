@@ -1,1 +1,61 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIFA/PS Competition Registration</title>
+  <link rel="icon" type="image/png" href="https://futminna.edu.ng/wp-content/uploads/2022/11/cropped-futlogo1-32x32.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body class="bg-gradient-to-br from-green-500 via-purple-500 to-purple-700 min-h-screen flex items-center justify-center p-4 relative">
+  <div id="card" class="bg-white max-w-md w-full rounded-2xl shadow-2xl p-6 text-center transform scale-95 opacity-0">
+    <h1 class="text-2xl font-bold text-purple-700 mb-4">FIFA/PS Competition</h1>
+    <p class="text-lg text-gray-700 mb-2"><span class="font-semibold">Account Number:</span> 704265344</p>
+    <p class="text-lg text-gray-700 mb-2"><span class="font-semibold">Bank:</span> Monipoint</p>
+    <p class="text-lg text-gray-700 mb-2"><span class="font-semibold">Account Name:</span> Luka Joshua Agwam</p>
+    <p class="text-lg text-green-600 font-bold mb-6">Price: 2000 Naira</p>
+
+    <p class="text-sm text-red-600 font-medium mb-4">⚠️ Make sure you have paid before clicking the button</p>
+
+    <button id="payBtn" class="w-full py-3 text-lg font-semibold text-white rounded-xl bg-gradient-to-r from-green-500 to-purple-600 shadow-lg hover:opacity-90 transition">I Have Paid</button>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-xl p-6 max-w-sm w-full text-center">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Confirm Payment</h2>
+      <p class="text-gray-600 mb-6">Are you sure you have made the payment of <span class="font-semibold text-green-600">2000 Naira</span>?</p>
+      <div class="flex justify-around">
+        <button id="cancelBtn" class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition">Cancel</button>
+        <button id="confirmBtn" class="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition">Yes, Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+ 
+    gsap.to("#card", { duration: 1, opacity: 1, scale: 1, ease: "back.out(1.7)" });
+
+
+    const payBtn = document.getElementById("payBtn");
+    const confirmModal = document.getElementById("confirmModal");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const confirmBtn = document.getElementById("confirmBtn");
+
+    payBtn.addEventListener("click", () => {
+      confirmModal.classList.remove("hidden");
+      gsap.fromTo("#confirmModal div", { scale: 0.8, opacity: 0 }, { duration: 0.4, scale: 1, opacity: 1, ease: "back.out(1.7)" });
+    });
+
+    cancelBtn.addEventListener("click", () => {
+      gsap.to("#confirmModal div", { duration: 0.3, scale: 0.8, opacity: 0, onComplete: () => confirmModal.classList.add("hidden") });
+    });
+
+    confirmBtn.addEventListener("click", () => {
+      window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSf5W1VWE4sCulIL1dGOqOeeym5IkX_rj7Qk-pc1NiSV-3nyxA/viewform?usp=dialog"; 
+    });
+  </script>
+</body>
+</html>
