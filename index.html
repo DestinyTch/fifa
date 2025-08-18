@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIFA/PS Competition Payment</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body class="bg-gradient-to-br from-green-500 via-purple-500 to-purple-700 min-h-screen flex items-center justify-center p-4">
+  <div id="card" class="bg-white max-w-md w-full rounded-2xl shadow-2xl p-6 text-center transform scale-95 opacity-0">
+    <h1 class="text-2xl font-bold text-purple-700 mb-4">FIFA/PS Competition</h1>
+    <p class="text-lg text-gray-700 mb-2"><span class="font-semibold">Account Number:</span> 7042625344</p>
+    <p class="text-lg text-gray-700 mb-2"><span class="font-semibold">Bank:</span> Monipoint</p>
+    <p class="text-lg text-gray-700 mb-2"><span class="font-semibold">Account Name:</span> Luka Joshua Agwam</p>
+    <p class="text-lg text-black font-bold mb-6">Reg Fee: 2000 Naira</p>
+
+    <button id="payBtn" class="w-full py-3 text-lg font-semibold text-white rounded-xl bg-gradient-to-r from-green-500 to-purple-600 shadow-lg hover:opacity-90 transition">I Have Paid</button>
+  </div>
+
+  <script>
+    // Animate card entrance
+    gsap.to("#card", { duration: 1, opacity: 1, scale: 1, ease: "back.out(1.7)" });
+
+    // Button click redirect
+    document.getElementById("payBtn").addEventListener("click", () => {
+      window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSf5W1VWE4sCulIL1dGOqOeeym5IkX_rj7Qk-pc1NiSV-3nyxA/viewform?usp=dialog";
+    });
+  </script>
+</body>
+</html>
